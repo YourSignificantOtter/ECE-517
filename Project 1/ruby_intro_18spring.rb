@@ -24,7 +24,6 @@ def missing_num(array)
       end
     end
     return array[-1] + 1
-    #do the comp
   end
 end
 
@@ -32,7 +31,7 @@ require 'prime'
 def check_product(array, n)
   raise ArgumentError.new("Only Integers allowed!") if !n.is_a? Integer or !array.all? {|i| i.is_a? Integer}
 
-  if n.prime?
+  if n.prime? # edge case, [1, 1, n] where n is prime, 1 * 1 * n -> Maybe dont bother checking prime as the combination + injection loop would catch this
     false
   elsif
     array.combination(3).to_a.each do |i|
@@ -77,14 +76,30 @@ class Student
   def initialize(name, arrival_time_at_classroom)
     raise ArgumentError.new if name.empty? or name.nil? or arrival_time_at_classroom.nil? or
         arrival_time_at_classroom.empty? or
-        /^([0-9]|0[0-9]|1[0-2]):[0-5][0-9] [ap]m$/ !~ arrival_time_at_classroom #regex needs to be updated, currently doesn't enforce leading 0
+        /^((0\d)|(1[0-2])):[0-5]\d [ap]m$/ !~ arrival_time_at_classroom
 
     @name = name
     @arrival_time_at_classroom = arrival_time_at_classroom
   end
+  
+  def name
+    @name
+  end
+  
+  def arrival_time_at_classroom
+    @arrival_time_at_classroom
+  end
+  
+  def name=(name)
+    @name = name
+  end
+  
+  def arrival_time_at_classroom=(arrival_time_at_classroom)
+    @arrival_time_at_classroom = arrival_time_at_classroom
+  end
 
   def arrive_on_time_for_class?
-    if @arrival_time_at_classroom =~ /^0[0-7]:\d\d am$/
+    if @arrival_time_at_classroom =~ /^0[0-7]:[0-5]\d am$/
       true
     else
       false
@@ -95,5 +110,4 @@ end
 
 myStudent = Student.new("Nick", "07:59 am")
 puts myStudent.arrive_on_time_for_class?
-
 
