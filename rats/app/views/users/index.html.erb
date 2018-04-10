@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<head>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Phone number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+	<td><%= user.roles.pluck(:name).join(",") %></td>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td><%= user.company_name %></td>
+        <td><%= user.address %></td>
+        <td><%= user.city %></td>
+        <td><%= user.state %></td>
+        <td><%= user.country %></td>
+        <td><%= user.phone_number %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } if !user.has_role? :admin %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path  if can? :create, User%>

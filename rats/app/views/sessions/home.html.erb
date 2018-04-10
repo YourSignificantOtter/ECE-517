@@ -1,0 +1,42 @@
+<h1>Home Page</h1>
+<p id="notice"><%= flash.now[:notice] %></p>
+<p id="alert"><%= flash.now[:alert] %></p>
+
+<p>
+  <strong>Welcome:</strong>
+  <%= current_user.name unless current_user.name.nil? %>
+  <%= current_user.email if current_user.name.nil? %>
+</p>
+
+<p>
+  <%= link_to 'View your profile', current_user %>
+<p>
+</p>
+  <%= link_to 'Edit your profile', edit_user_path(id: current_user.id) %>
+<p>
+</p>
+  <%= link_to 'View all Users', users_path if current_role ==  :admin %>
+<p>
+</p>
+  <%= link_to 'Create new User', new_user_path if current_role ==  :admin %>
+<p>
+</p>
+  <%= link_to 'View all Companies', companies_path %>
+<p>
+</p>
+  <%= link_to 'Create new Company', new_company_path if current_role ==  :admin %>
+<p>
+</p>
+  <%= link_to 'View all Jobs', jobs_path %>
+<p>
+</p>
+  <%= link_to 'Create new Job', new_job_path if current_role == :admin || (current_role == :recruiter && !current_user.company_id.nil?) %>
+<p>
+</p>
+  <%= link_to 'View all Applications', applications_path %>
+</p>
+<p>
+  <%= link_to 'Log Out', logout_path %>
+</p>
+
+

@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Jobs</h1>
+<i>Using the text field below you can search company name, headquarters, industry, and size</i>
+<%= form_for :job, url: "/jobs", method: :get do |f| %>
+  Company:
+  <%= f.text_field :name, value: @name %>
+  Headquarters:
+  <%= f.text_field :headquarters, value: @headquarters %>
+  Industry:
+  <%= f.select :industry, industries.prepend(''), selected: @industry %>
+  Size
+  <%= f.select :size, ['', '1-50', '51-200', '201-500', '501-1000', '1000+'], selected: @size%>
+  <%= f.button "Filter", value: :filter %>
+  <%= f.button "Clear Filters", value: :clear_filters %>
+<% end %>
+
+
+<head>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<table>
+  <thead>
+  <tr>
+    <th>Company</th>
+    <th>Job Title</th>
+    <th>Employment type</th>
+    <th>Job description</th>
+    <th>Requirements</th>
+    <th>Responsibilities</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @jobs.each do |job| %>
+    <tr>
+      <td><%= job.company %></td>
+      <td><%= job.job_title %></td>
+      <td><%= job.employment_type %></td>
+      <td><%= job.job_description %></td>
+      <td><%= job.requirements %></td>
+      <td><%= job.responsibilities %></td>
+      <td><%= link_to 'Show', job %></td>
+      <% if current_role == :admin || (current_role == :recruiter && current_user.id == job.user_id) %>
+        <td><%= link_to 'Edit', edit_job_path(job) %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job', new_job_path if current_role == :admin || (current_role == :recruiter && !current_user.company_id.nil?) %>

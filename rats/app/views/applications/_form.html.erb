@@ -1,0 +1,79 @@
+<%= form_with(model: application, local: true) do |form| %>
+  <% if application.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+      <ul>
+      <% application.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!--  <div class="field">
+    <%#= form.label :job_id %>
+    <%#= form.number_field :job_id, id: :application_job_id %>
+  </div>
+-->
+  <%= form.hidden_field :job_id, value: @j_id %>
+<!--
+  <div class="field">
+    <%#= form.label :user_id %>
+    <%#= form.number_field :user_id, id: :application_user_id %>
+  </div>
+-->
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.select :gender, ['-', 'Male', 'Female', 'Decline to state'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :additional_info %>
+    <%= form.text_area :additional_info, id: :application_additional_info %>
+  </div>
+
+  <div class="field">
+    <%= form.label :portfolio_url %>
+    <%= form.text_field :portfolio_url, id: :application_portfolio_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :linkedin_url %>
+    <%= form.text_field :linkedin_url, id: :application_linkedin_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_company %>
+    <%= form.text_field :current_company, id: :application_current_company %>
+  </div>
+
+  <div class="field">
+    <%= form.label :disability_status %>
+    <%= form.select :disability_status, ['-', 'Yes, I have a disability', 'No, I don\'t have a disability', 'I don\'t wish to answer'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :veteran_status %>
+    <%= form.select :veteran_status, ['-', 'I am not a veteran', 'I identify as a veteran, just not a protected veteran', 'I identify as a protected veteran', 'I do not wish to self-identify'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :race %>
+    <%= form.select :race, ['-', 'American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'Two or More Races', 'White', 'Decline to state'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status if current_role != :job_seeker %>
+    <%= form.select :status, ['Application Submitted', 'In Process', 'Hired', 'Not Selected'] if current_role != :job_seeker%>
+  </div>
+
+  <div class="field">
+    <%= form.label :resume%>
+    <%= form.file_field :resume%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

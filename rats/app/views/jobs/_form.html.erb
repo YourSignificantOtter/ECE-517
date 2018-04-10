@@ -1,0 +1,47 @@
+<%= form_with(model: job, local: true) do |form| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company_id %>
+    <%= form.select :company_id, Company.all.collect{|c| [c.name, c.id]}, :selected => current_user.company_id if current_role == :admin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job_title %>
+    <%= form.text_field :job_title, id: :job_job_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :employment_type %>
+    <%= form.select :employment_type, ['Co-Op', 'Internship', 'Volunteer Work', 'Part Time', 'Full Time', 'Contractor', 'Hourly']  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job_description %>
+    <%= form.text_area :job_description, id: :job_job_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :requirements %>
+    <%= form.text_area :requirements, id: :job_requirements %>
+  </div>
+
+  <div class="field">
+    <%= form.label :responsibilities %>
+    <%= form.text_area :responsibilities, id: :job_responsibilities %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

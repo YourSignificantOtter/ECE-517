@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>name:</strong>
+  <%= @company.name %>
+</p>
+
+<p>
+  <strong>Headquarters:</strong>
+  <%= @company.headquarters %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @company.website %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @company.size %>
+</p>
+
+<p>
+  <strong>Synopsis:</strong>
+  <%= @company.synopsis %>
+</p>
+
+<p>
+  <strong>Founded:</strong>
+  <%= @company.founded %>
+</p>
+
+<p>
+  <strong>Industry:</strong>
+  <%= @company.industry %>
+</p>
+
+<p>
+  <strong>Revenue:</strong>
+  <%= @company.revenue %>
+</p>
+
+<% if current_user.has_role?(:admin) || (current_role == :recruiter && current_user.company_id == @company.id) %>
+  <%= link_to 'Edit', edit_company_path(@company) %> |
+  <% if current_user.has_role?(:admin) %>
+    <%= link_to 'Destroy', @company, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <% end %>
+<% end %>
+<%= link_to 'Back', companies_path %>
