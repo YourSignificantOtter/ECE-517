@@ -75,7 +75,7 @@ RSpec.describe ApplicationsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ApplicationsController. Be sure to keep this updated too.
-  let(:valid_session) { {:user_id => User.find_by_email('admin@tsys.com').id,:current_role=>:admin} }
+  let(:valid_session) { {:user_id => User.find_by_email('admin@temporary.com').id,:current_role=>:admin} }
 
   describe "GET #index" do
     it "returns a success response" do
