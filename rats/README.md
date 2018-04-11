@@ -1,16 +1,16 @@
 # README
 
 # Seeded User Credentials
-admin email: admin@tsys.com <br />
+admin email: admin@temporary.com <br />
 admin password: 1qazxsw2 <br />
 <br/>
-recruiter email: recruiter@tsys.com <br/>
+recruiter email: recruiter@temporary.com <br/>
 recruiter password: pass <br/>
 <br/>
-job seeker email: job_seeker@tsys.com <br/>
+job seeker email: job_seeker@temporary.com <br/>
 job seeker password: pass <br/>
 <br/>
-account with both roles email: both@tsys.com <br/>
+account with both roles email: both@temporary.com <br/>
 account with both roles password: pass <br/>
 <br/>
 <br/>
